@@ -111,7 +111,7 @@ def negatyw(obrazek):
     tab2 = np.zeros((h,w), dtype=np.uint8)
     for i in range(h):
         for j in range(w):
-            tab2[i,j] = 256 - tab1[i,j]
+            tab2[i,j] = 255 - tab1[i,j]
     
     tab_show = Image.fromarray(tab2)
     return tab_show
@@ -124,47 +124,103 @@ def rysuj_pionowe_l(h,w, grub):
     for i in range(h):
         for j in range(w):
             if j%(2*grub) >= grub:
-                tab1[i,j] = i*255/h 
+                tab1[i,j] = i*256/h 
+
+    tab_show = Image.fromarray(tab1)
+    return tab_show
+#----------------------------------------------------------
+def negatyw_rgb(obrazek):
+    tab1 = np.asarray(obrazek)
+    h,w = tab1.shape
+    tab2 = np.zeros((h,w,3), dtype=np.uint8)
+    for i in range(h):
+        for j in range(w):
+            tab2[i,j,0] = 255 - tab1[i,j,0]
+            tab2[i,j,1] = 255 - tab1[i,j,1]
+            tab2[i,j,2] = 255 - tab1[i,j,2]
+    
+    tab_show = Image.fromarray(tab2)
+    return tab_show
+
+#----------------------------------------------------------
+def kolorowe_inicjaly(obraz,grub):
+    tab_obrazu = np.asarray(obraz)
+    h, w = tab_obrazu.shape
+    
+    tab1 = np.zeros((h,w,3), dtype=np.uint8)
+    for i in range(h):
+        for j in range(w):
+            if (tab_obrazu[i,j] == 0):
+                if i%(2*grub) <= grub: 
+                    tab1[i,j,0] = 33
+                    tab1[i,j,1] = 255
+                    tab1[i,j,2] = 90
+                else:
+                    tab1[i,j,0] = 200
+                    tab1[i,j,1] = 0
+                    tab1[i,j,2] = 44
+            else:
+                tab1[i,j,:] = 255
+    tab_show = Image.fromarray(tab1)
+    return tab_show
+
+#----------------------------------------------------------
+# funkcja rysuje kolorowe pionowe pasy o szerokości grub
+# kolor zmienia sięnastępująco:
+# R po wysokości od 0 do 255
+# G po wysokości od 255 do 0
+# B po serokości od 0 do 255
+
+def rysuj_pionowe_rgb(h,w, grub):
+    tab1 = np.ones((h,w,3), dtype=np.uint8)
+    for i in range(h):
+        for j in range(w):
+            if j%(2*grub) >= grub:
+                tab1[i,j,0] = i*256/h 
+                tab1[i,j,1] = 255-(i*256/h)
+                tab1[i,j,2] = j*256/w 
 
     tab_show = Image.fromarray(tab1)
     return tab_show
 #----------------------------------------------------------
 
-ramka = rysuj_ramke(obrazek, 5)
-ramka.save("ramka_5.bmp")
+#ramka = rysuj_ramke(obrazek, 5)
+#ramka.save("ramka_5.bmp")
+#
+#ramka = rysuj_ramke(obrazek, 10)
+#ramka.save("ramka_10.bmp")
+#
+#ramka = rysuj_same_ramki(320,480,10)
+#ramka.save("obraz1.bmp")
+#
+#ramka = rysuj_pionowe(320,480,10)
+#ramka.save("obraz2.bmp")
+#
+#ramka = wypelnij_dopunktu(320,480,100,50)
+#ramka.save("obraz3.bmp")
+#
+## funkcja rysuj_kola tworzy okregi 
+## rozchodzace sie od punktu (m,n).
+## ich gestosc mozemy regulowac parametrem grubosc
+#
+#ramka = rysuj_kola(320,480,100,50,44) 
+#ramka.save("obraz4.bmp")
+#
+#ramka = rysuj_kola_l(320,480,100,50,3) 
+#ramka.save("obraz4_2.bmp")
+#
+#ramka = negatyw(ramka)
+#ramka.save("obraz4_2N.bmp")
+#
+## funkcja rysuje pionowe linie
+## białe linie są gradientem przez całą wysoność obrazka
+#
+#ramka = rysuj_pionowe_l(320,480,10)
+#ramka.save("obraz2_2.bmp")
+#
+#ramka = negatyw(ramka)
+#ramka.save("obraz2_2N.bmp")
 
-ramka = rysuj_ramke(obrazek, 10)
-ramka.save("ramka_10.bmp")
-
-ramka = rysuj_same_ramki(320,480,10)
-ramka.save("obraz1.bmp")
-
-ramka = rysuj_pionowe(320,480,10)
-ramka.save("obraz2.bmp")
-
-ramka = wypelnij_dopunktu(320,480,100,50)
-ramka.save("obraz3.bmp")
-
-# funkcja rysuj_kola tworzy okregi 
-# rozchodzace sie od punktu (m,n).
-# ich gestosc mozemy regulowac parametrem grubosc
-
-ramka = rysuj_kola(320,480,100,50,44) 
-ramka.save("obraz4.bmp")
-
-ramka = rysuj_kola_l(320,480,100,50,3) 
-ramka.save("obraz4_2.bmp")
-
-ramka = negatyw(ramka)
-ramka.save("obraz4_2N.bmp")
-
-# funkcja rysuje pionowe linie
-# białe linie są gradientem przez całą wysoność obrazka
-
-ramka = rysuj_pionowe_l(320,480,10)
-ramka.save("obraz2_2.bmp")
-
-ramka = negatyw(ramka)
-ramka.save("obraz2_2N.bmp")
-
+#ramka = kolorowe_inicjaly(obrazek,10)
+ramka = rysuj_pionowe_rgb(320,480, 10)
 ramka.show()
