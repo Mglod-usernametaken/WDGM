@@ -91,9 +91,9 @@ def rysuj_kola(h,w,m,n, grubosc):
     return tab_show
 
 #----------------------------------------------------------
-#funkcja rysuj_kola_l tworzy koncentryczne gradienty 
-#rozchodzace sie od punktu (n,m).
-#ich gestosc mozemy regulowac parametrem gestosc
+# funkcja rysuj_kola_l tworzy koncentryczne gradienty 
+# rozchodzace sie od punktu (n,m).
+# ich gestosc mozemy regulowac parametrem gestosc
 
 def rysuj_kola_l(h,w,m,n, gestosc=1):
     tab1 = np.ones((h,w), dtype=np.uint8)
@@ -116,37 +116,55 @@ def negatyw(obrazek):
     tab_show = Image.fromarray(tab2)
     return tab_show
 #----------------------------------------------------------
+# funkcja rysuje pionowe linie
+# białe linie są gradientem przez całą wysoność obrazka
+
+def rysuj_pionowe_l(h,w, grub):
+    tab1 = np.ones((h,w), dtype=np.uint8)
+    for i in range(h):
+        for j in range(w):
+            if j%(2*grub) >= grub:
+                tab1[i,j] = i*255/h 
+
+    tab_show = Image.fromarray(tab1)
+    return tab_show
 #----------------------------------------------------------
 
-#ramka = rysuj_ramke(obrazek, 5)
-#ramka.save("ramka_5.bmp")
-#
-#ramka = rysuj_ramke(obrazek, 10)
-#ramka.save("ramka_10.bmp")
-#
-#ramka = rysuj_same_ramki(320,480,10)
-#ramka.save("obraz1.bmp")
-#
-#ramka = rysuj_pionowe(320,480,10)
-#ramka.save("obraz2.bmp")
-#
-#ramka = wypelnij_dopunktu(320,480,100,50)
-#ramka.save("obraz3.bmp")
+ramka = rysuj_ramke(obrazek, 5)
+ramka.save("ramka_5.bmp")
 
-##funkcja rysuj_kola tworzy okregi 
-##rozchodzace sie od punktu (m,n).
-##ich gestosc mozemy regulowac parametrem grubosc
+ramka = rysuj_ramke(obrazek, 10)
+ramka.save("ramka_10.bmp")
 
-#ramka = rysuj_kola(320,480,100,50,44) 
-#ramka.save("obraz4.bmp")
+ramka = rysuj_same_ramki(320,480,10)
+ramka.save("obraz1.bmp")
 
-#ramka = rysuj_kola_l(320,480,100,50,3) 
-#ramka.save("obraz4_2.bmp")
+ramka = rysuj_pionowe(320,480,10)
+ramka.save("obraz2.bmp")
 
-#ramka = negatyw(ramka2)
-#ramka.save("obraz4_2N.bmp")
+ramka = wypelnij_dopunktu(320,480,100,50)
+ramka.save("obraz3.bmp")
 
+# funkcja rysuj_kola tworzy okregi 
+# rozchodzace sie od punktu (m,n).
+# ich gestosc mozemy regulowac parametrem grubosc
 
+ramka = rysuj_kola(320,480,100,50,44) 
+ramka.save("obraz4.bmp")
 
+ramka = rysuj_kola_l(320,480,100,50,3) 
+ramka.save("obraz4_2.bmp")
+
+ramka = negatyw(ramka)
+ramka.save("obraz4_2N.bmp")
+
+# funkcja rysuje pionowe linie
+# białe linie są gradientem przez całą wysoność obrazka
+
+ramka = rysuj_pionowe_l(320,480,10)
+ramka.save("obraz2_2.bmp")
+
+ramka = negatyw(ramka)
+ramka.save("obraz2_2N.bmp")
 
 ramka.show()
