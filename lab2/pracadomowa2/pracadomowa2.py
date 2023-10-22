@@ -131,8 +131,8 @@ def rysuj_pionowe_l(h,w, grub):
 #----------------------------------------------------------
 def negatyw_rgb(obrazek):
     tab1 = np.asarray(obrazek)
-    h,w = tab1.shape
-    tab2 = np.zeros((h,w,3), dtype=np.uint8)
+    h,w,t = tab1.shape
+    tab2 = np.zeros((h,w,t), dtype=np.uint8)
     for i in range(h):
         for j in range(w):
             tab2[i,j,0] = 255 - tab1[i,j,0]
@@ -190,7 +190,7 @@ def rysuj_pionowe_rgb(h,w, grub):
 #ramka = rysuj_ramke(obrazek, 10)
 #ramka.save("ramka_10.bmp")
 #
-#ramka = rysuj_same_ramki(320,480,10)
+#ramka = rysuj_same_ramki(320,480,16)
 #ramka.save("obraz1.bmp")
 #
 #ramka = rysuj_pionowe(320,480,10)
@@ -206,7 +206,7 @@ def rysuj_pionowe_rgb(h,w, grub):
 #ramka = rysuj_kola(320,480,100,50,44) 
 #ramka.save("obraz4.bmp")
 #
-#ramka = rysuj_kola_l(320,480,100,50,3) 
+#ramka = rysuj_kola_l(320,480,100,250,3) 
 #ramka.save("obraz4_2.bmp")
 #
 #ramka = negatyw(ramka)
@@ -223,6 +223,7 @@ def rysuj_pionowe_rgb(h,w, grub):
 
 #ramka = kolorowe_inicjaly(obrazek,10)
 ramka = rysuj_pionowe_rgb(320,480, 10)
-ramka.save("obraz2_2.png")
-ramka.save("obraz2_2.jpg")
+ramka = negatyw_rgb(ramka)
+#ramka.save("obraz2_2.png")
+#ramka.save("obraz2_2.jpg")
 ramka.show()
