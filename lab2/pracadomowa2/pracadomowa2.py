@@ -223,4 +223,6 @@ def rysuj_pionowe_rgb(h,w, grub):
 
 #ramka = kolorowe_inicjaly(obrazek,10)
 ramka = rysuj_pionowe_rgb(320,480, 10)
+ramka.save("obraz2_2.png")
+ramka.save("obraz2_2.jpg")
 ramka.show()
