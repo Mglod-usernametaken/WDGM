@@ -105,6 +105,16 @@ def rysuj_kola_l(h,w,m,n, gestosc=1):
     return tab_show
 
 #----------------------------------------------------------
+def negatyw(obrazek):
+    tab1 = np.asarray(obrazek)
+    h,w = tab1.shape
+    tab2 = np.zeros((h,w), dtype=np.uint8)
+    for i in range(h):
+        for j in range(w):
+            tab2[i,j] = 256 - tab1[i,j]
+    
+    tab_show = Image.fromarray(tab2)
+    return tab_show
 #----------------------------------------------------------
 #----------------------------------------------------------
 
@@ -123,14 +133,20 @@ def rysuj_kola_l(h,w,m,n, gestosc=1):
 #ramka = wypelnij_dopunktu(320,480,100,50)
 #ramka.save("obraz3.bmp")
 
-#funkcja rysuj_kola tworzy okregi 
-#rozchodzace sie od punktu (m,n).
-#ich gestosc mozemy regulowac parametrem grubosc
+##funkcja rysuj_kola tworzy okregi 
+##rozchodzace sie od punktu (m,n).
+##ich gestosc mozemy regulowac parametrem grubosc
 
 #ramka = rysuj_kola(320,480,100,50,44) 
 #ramka.save("obraz4.bmp")
 
+#ramka = rysuj_kola_l(320,480,100,50,3) 
+#ramka.save("obraz4_2.bmp")
+
+#ramka = negatyw(ramka2)
+#ramka.save("obraz4_2N.bmp")
 
 
-ramka = rysuj_kola_l(320,480,100,50,3) 
+
+
 ramka.show()
