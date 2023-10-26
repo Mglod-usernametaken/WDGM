@@ -115,6 +115,7 @@ def negatyw(obrazek):
     
     tab_show = Image.fromarray(tab2)
     return tab_show
+
 #----------------------------------------------------------
 # funkcja rysuje pionowe linie
 # białe linie są gradientem przez całą wysoność obrazka
@@ -128,6 +129,7 @@ def rysuj_pionowe_l(h,w, grub):
 
     tab_show = Image.fromarray(tab1)
     return tab_show
+
 #----------------------------------------------------------
 def negatyw_rgb(obrazek):
     tab1 = np.asarray(obrazek)
@@ -152,13 +154,13 @@ def kolorowe_inicjaly(obraz,grub):
         for j in range(w):
             if (tab_obrazu[i,j] == 0):
                 if i%(2*grub) <= grub: 
-                    tab1[i,j,0] = 33
-                    tab1[i,j,1] = 255
-                    tab1[i,j,2] = 90
-                else:
-                    tab1[i,j,0] = 200
+                    tab1[i,j,0] = 128
                     tab1[i,j,1] = 0
-                    tab1[i,j,2] = 44
+                    tab1[i,j,2] = 128
+                else:
+                    tab1[i,j,0] = 90
+                    tab1[i,j,1] = 255
+                    tab1[i,j,2] = 32
             else:
                 tab1[i,j,:] = 255
     tab_show = Image.fromarray(tab1)
@@ -182,8 +184,21 @@ def rysuj_pionowe_rgb(h,w, grub):
 
     tab_show = Image.fromarray(tab1)
     return tab_show
-#----------------------------------------------------------
 
+#----------------------------------------------------------
+def rysuj_kola_rgb(h,w,m,n, gestosc=1):
+    tab1 = np.ones((h,w,3), dtype=np.uint8)
+    for i in range(h):
+        for j in range(w):
+            tab1[i,j,0] = (math.sqrt((i-n)**2 + (j-m)**2)*gestosc)%256
+            tab1[i,j,1] = (i*256)/h
+            tab1[i,j,2] = (j*256)/w
+
+    tab_show = Image.fromarray(tab1)
+    return tab_show
+
+
+#----------------------------------------------------------
 #ramka = rysuj_ramke(obrazek, 5)
 #ramka.save("ramka_5.bmp")
 #
@@ -220,10 +235,30 @@ def rysuj_pionowe_rgb(h,w, grub):
 #
 #ramka = negatyw(ramka)
 #ramka.save("obraz2_2N.bmp")
-
-#ramka = kolorowe_inicjaly(obrazek,10)
-ramka = rysuj_pionowe_rgb(320,480, 10)
-ramka = negatyw_rgb(ramka)
+#
+#ramka = rysuj_kola_rgb(320,480, 100,200)
+#ramka.save("obraz4_2.png")
+#ramka.save("obraz4_2.jpg")
+#
+#ramka = rysuj_kola_rgb(320,480, 100,200)
+#ramka = negatyw_rgb(ramka)
+#ramka.save("obraz4_2N.png")
+#ramka.save("obraz4_2N.jpg")
+#
+#ramka = rysuj_pionowe_rgb(320,480, 10)
 #ramka.save("obraz2_2.png")
 #ramka.save("obraz2_2.jpg")
+#
+#ramka = rysuj_pionowe_rgb(320,480, 10)
+#ramka = negatyw_rgb(ramka)
+#ramka.save("obraz2_2N.png")
+#ramka.save("obraz2_2N.jpg")
+#
+
+ramka = kolorowe_inicjaly(obrazek, 10)
+ramka.save("obraz3.png")
+ramka.save("obraz3.jpg")
+
 ramka.show()
+
+
