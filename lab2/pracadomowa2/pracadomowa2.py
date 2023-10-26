@@ -183,6 +183,22 @@ def rysuj_pionowe_rgb(h,w, grub):
     tab_show = Image.fromarray(tab1)
     return tab_show
 #----------------------------------------------------------
+# funkcja rysuje kolorowe czerwone koła o środku w punkcie (m,n)
+# oraz umieszcza je na tle zielonego gradientu w pionie,
+# i niebieskiego gradientu w poziomie.
+
+def rysuj_kola_rgb(h,w,m,n, gestosc=1):
+    tab1 = np.zeros((h,w,3),dtype=np.uint8)
+    for i in range(h):
+        for j in range(w):
+            tab1[i,j,0] = (math.sqrt((i-n)**2 + (j-m)**2)*gestosc)%256
+            tab1[i,j,1] = (i*256)/h
+            tab1[i,j,2] = (j*256)/w
+
+    tab_show = Image.fromarray(tab1)
+    return tab_show
+
+#----------------------------------------------------------
 
 #ramka = rysuj_ramke(obrazek, 5)
 #ramka.save("ramka_5.bmp")
