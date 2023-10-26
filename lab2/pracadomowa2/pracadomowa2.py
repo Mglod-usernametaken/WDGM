@@ -203,8 +203,8 @@ def rysuj_pionowe_rgb(h,w, grub):
 ## rozchodzace sie od punktu (m,n).
 ## ich gestosc mozemy regulowac parametrem grubosc
 #
-#ramka = rysuj_kola(320,480,100,50,44) 
-#ramka.save("obraz4.bmp")
+ramka = rysuj_kola(320,480,100,50,10)
+ramka.save("obraz4.bmp")
 #
 #ramka = rysuj_kola_l(320,480,100,250,3) 
 #ramka.save("obraz4_2.bmp")
@@ -222,8 +222,8 @@ def rysuj_pionowe_rgb(h,w, grub):
 #ramka.save("obraz2_2N.bmp")
 
 #ramka = kolorowe_inicjaly(obrazek,10)
-ramka = rysuj_pionowe_rgb(320,480, 10)
-ramka = negatyw_rgb(ramka)
+#ramka = rysuj_pionowe_rgb(320,480, 10)
+#ramka = negatyw_rgb(ramka)
 #ramka.save("obraz2_2.png")
 #ramka.save("obraz2_2.jpg")
 ramka.show()
