@@ -53,6 +53,19 @@ def generuj_histogram(im):
     plt.show()
     #plt.savefig("histogram1.png")
 
+#----------------------------------------------------
+def odkoduj(im1,im2):
+    t_1 = np.asarray(im1)
+    t_2 = np.asarray(im2)
+    h, w, d = t_1.shape
+    secret = np.zeros((h,w), dtype=uint8)
+    # for i,j in h,w 
+    # sumuj r+g+b w t_1 i t_2
+    # diff umieść w secret[i,j]
+
+
+
+#----------------------------------------------------
 # im3jpg = Image.open("im3.jpg")
 # im3png = Image.open("im3.png")
 # 
