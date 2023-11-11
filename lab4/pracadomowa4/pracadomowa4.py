@@ -64,11 +64,22 @@ def odkoduj(im1,im2):
     # diff umieść w secret[i,j]
     for i in range(h):
         for j in range(w):
-            t1 = int(t_1[i,j,0]+t_1[i,j,1]+t_1[i,j,2])
-            t2 = int(t_2[i,j,0]+t_2[i,j,1]+t_2[i,j,2])
-            secret[i,j] = t2-t1
+            t1 = t_1[i,j,0]+t_1[i,j,1]+t_1[i,j,2]
+            t2 = t_2[i,j,0]+t_2[i,j,1]+t_2[i,j,2]
+            secret[i,j] = t1-t2
     sec_img = Image.fromarray(secret)
-    sec_img.show()
+    return sec_img
+
+#----------------------------------------------------
+def enchance(img, factor):
+    img = np.asarray(img)
+    h,w,d = img.shape
+    enhanced = np.zeros((h,w,d), dtype=np.uint8)
+    for i in range(h):
+        for j in range(w):
+            enhanced[i,j]= img[i,j]*factor
+    enh = Image.fromarray(enhanced)
+    enh.show()
 
 #----------------------------------------------------
 # im3jpg = Image.open("im3.jpg")
@@ -97,23 +108,26 @@ statystyki(diff)
 obraz = Image.open("shrimp.jpg")
 obraz.save("obraz1.jpg")
 obraz1 = Image.open("obraz1.jpg")
-obraz.save("obraz2.jpg")
+obraz1.save("obraz2.jpg")
 obraz2 = Image.open("obraz2.jpg")
-obraz.save("obraz3.jpg")
+obraz2.save("obraz3.jpg")
 obraz3 = Image.open("obraz3.jpg")
-obraz.save("obraz4.jpg")
+obraz3.save("obraz4.jpg")
 obraz4 = Image.open("obraz4.jpg")
-obraz.save("obraz5.jpg")
+obraz4.save("obraz5.jpg")
 obraz5 = Image.open("obraz5.jpg")
 
 # obraz5.show()
-#diff5 = ImageChops.difference(obraz, obraz5)
-# diff5.show()
-#generuj_histogram(diff5)
-#ststystyki(diff5)
+diff5 = ImageChops.difference(obraz, obraz5)
+# generuj_histogram(diff5)
+# statystyki(diff5)
 
-zakodowany1 = Image.open("zakodowany1.bmp")
-zakodowany2 = Image.open("zakodowany2.bmp")
-odkoduj(zakodowany1, zakodowany2)
-
-
+enchance(diff5,10)
+# source = Image.open("jesien.jpg")
+# zakodowany1 = Image.open("zakodowany1.bmp")
+# zakodowany2 = Image.open("zakodowany2.bmp")
+# odkodowany1= odkoduj(source, zakodowany1)
+# odkodowany1.save("kod1.png")
+# odkodowany2= odkoduj(source, zakodowany2)
+# odkodowany2.save("kod2.png")
+# 
