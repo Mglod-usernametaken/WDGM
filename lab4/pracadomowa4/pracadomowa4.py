@@ -50,8 +50,7 @@ def generuj_histogram(im):
     plt.bar(range(256), hist[:256], color='r', alpha=0.5)
     plt.bar(range(256), hist[256:2 * 256], color='g', alpha=0.4)
     plt.bar(range(256), hist[2 * 256:], color='b', alpha=0.3)
-    plt.show()
-    #plt.savefig("histogram1.png")
+    plt.savefig("histogram45.png")
 
 #----------------------------------------------------
 def odkoduj(im1,im2):
@@ -71,7 +70,7 @@ def odkoduj(im1,im2):
     return sec_img
 
 #----------------------------------------------------
-def enchance(img, factor):
+def enhance(img, factor):
     img = np.asarray(img)
     h,w,d = img.shape
     enhanced = np.zeros((h,w,d), dtype=np.uint8)
@@ -79,30 +78,32 @@ def enchance(img, factor):
         for j in range(w):
             enhanced[i,j]= img[i,j]*factor
     enh = Image.fromarray(enhanced)
-    enh.show()
+    return enh
 
 #----------------------------------------------------
-# im3jpg = Image.open("im3.jpg")
-# im3png = Image.open("im3.png")
-# 
-# diff_3 = ImageChops.difference(im3png,im3jpg)
-# diff_3.show()
-# diff_3.save("diff.png")
+im3jpg = Image.open("im3.jpg")
+im3png = Image.open("im3.png")
+
+diff_3 = ImageChops.difference(im3png,im3jpg)
+diff_3.show()
+diff_3.save("diff.png")
+# diff_enhanced = enhance(diff_3, 5)
+# diff_enhanced.show()
+# diff_enhanced.save("diff_enhanced.png")
 
 diff = Image.open("diff.png")
 statystyki(diff)
 
-# generuj_histogram(diff)
-# #generuj_histogram(im3jpg)
-# 
-# zlicz, procent = zlicz_roznice_srednia_RGB(diff, 5)
+generuj_histogram(diff)
+#  
+# zlicz, procent = zlicz_roznice_srednia_RGB(diff, 10)
 # print('liczba niepasujących pikseli = ' , zlicz)
 # print('procent niepasujących pikseli = ' , procent)
 # 
-# zlicz, procent = zlicz_roznice_suma_RGB(diff, 5)
+# zlicz, procent = zlicz_roznice_suma_RGB(diff, 10)
 # print('liczba niepasujących pikseli = ' , zlicz)
 # print('procent niepasujących pikseli = ' , procent)
-# 
+
 
 
 obraz = Image.open("shrimp.jpg")
@@ -118,11 +119,19 @@ obraz4.save("obraz5.jpg")
 obraz5 = Image.open("obraz5.jpg")
 
 # obraz5.show()
-diff5 = ImageChops.difference(obraz, obraz5)
-# generuj_histogram(diff5)
-# statystyki(diff5)
+print("statystyki 01")
+diff01 = ImageChops.difference(obraz, obraz1)
+generuj_histogram(diff01)
+statystyki(diff01)
 
-enchance(diff5,10)
+print("statystyki 45")
+diff45 = ImageChops.difference(obraz4, obraz5)
+generuj_histogram(diff45)
+statystyki(diff01)
+
+
+
+enhance(diff45,10)
 # source = Image.open("jesien.jpg")
 # zakodowany1 = Image.open("zakodowany1.bmp")
 # zakodowany2 = Image.open("zakodowany2.bmp")
