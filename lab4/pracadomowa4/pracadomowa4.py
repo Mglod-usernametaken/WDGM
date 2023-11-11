@@ -58,12 +58,17 @@ def odkoduj(im1,im2):
     t_1 = np.asarray(im1)
     t_2 = np.asarray(im2)
     h, w, d = t_1.shape
-    secret = np.zeros((h,w), dtype=uint8)
+    secret = np.zeros((h,w), dtype=np.uint8)
     # for i,j in h,w 
     # sumuj r+g+b w t_1 i t_2
     # diff umieść w secret[i,j]
-
-
+    for i in range(h):
+        for j in range(w):
+            t1 = int(t_1[i,j,0]+t_1[i,j,1]+t_1[i,j,2])
+            t2 = int(t_2[i,j,0]+t_2[i,j,1]+t_2[i,j,2])
+            secret[i,j] = t2-t1
+    sec_img = Image.fromarray(secret)
+    sec_img.show()
 
 #----------------------------------------------------
 # im3jpg = Image.open("im3.jpg")
@@ -102,8 +107,13 @@ obraz.save("obraz5.jpg")
 obraz5 = Image.open("obraz5.jpg")
 
 # obraz5.show()
-diff5 = ImageChops.difference(obraz, obraz5)
+#diff5 = ImageChops.difference(obraz, obraz5)
 # diff5.show()
-generuj_histogram(diff5)
-ststystyki(diff5)
+#generuj_histogram(diff5)
+#ststystyki(diff5)
+
+zakodowany1 = Image.open("zakodowany1.bmp")
+zakodowany2 = Image.open("zakodowany2.bmp")
+odkoduj(zakodowany1, zakodowany2)
+
 
