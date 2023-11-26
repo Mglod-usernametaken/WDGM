@@ -6,7 +6,7 @@ import math
 shrimp = Image.open("shrimp.jpg")
 mg = Image.open("inicjaly.bmp")
 
-def zakres(h, w):
+def zakres(w, h):
     return[(i, j) for i in range(w) for j in range(h)]
 
 #-------------------------------------------------------------------
@@ -14,12 +14,12 @@ def wstaw_inicjaly(obrazek, inicjal, m, n, r, g, b):
     obraz = obrazek.load()
     ini = np.asarray(inicjal)
     w, h  = obrazek.size
-    wi, hi = inicjal.size
+    hi, wi = inicjal.size
     
     for i, j in zakres(wi, hi):
         if 0 == ini[i,j]:
-            obraz[i,j] = (r, g, b)
-    obraz.show()
+            obraz[j+m,i+n] = (r, g, b)
+    obrazek.show()
     return obraz
 
 
