@@ -50,5 +50,6 @@ def transformacja_logarytmiczna(obrazek):
             k = 255* np.log(1+k/255)
 #-------------------------------------------------------------------
 # obrazek1 = wstaw_inicjaly(shrimp, mg,1820,1230, 255,0,255)
-# obraz1.save("obraz1.png")
-obrazek1 = filtruj_inicjaly(shrimp, mg,200,200)
+# obrazek1.save("obraz1.png")
+obrazek2 = filtruj_inicjaly(shrimp, mg,200,200)
+obrazek2.save("obraz2.png")
