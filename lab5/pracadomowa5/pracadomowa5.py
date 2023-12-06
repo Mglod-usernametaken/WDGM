@@ -1,4 +1,5 @@
 from PIL import Image
+import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.pyplot as plt
 import math
@@ -16,11 +17,11 @@ def wstaw_inicjaly(obrazek, inicjal, m, n, r, g, b):
     w, h  = obrazek.size
     hi, wi = inicjal.size
     
-    for i, j in zakres(wi, hi):
-        if 0 == ini[i,j]:
-            obraz[j+m,i+n] = (r, g, b)
+    for i, j in zakres(hi, wi):
+        if 0 == ini[j,i]:
+            obraz[w-i,h-j] = (r, g, b)
     obrazek.show()
-    return obraz
+    return obrazek
 
 #-------------------------------------------------------------------
 def filtruj_inicjaly(obrazek, inicjal, m, n, factor):
@@ -81,17 +82,60 @@ def rysuj_kwadrat_srednia(obraz, m,n,k):
     return obraz
 
 #-------------------------------------------------------------------
+def kontrast(obraz, wsp):
+    obrazek = obraz.load()
+    mn = (( 255 + wsp)/255)**2
+    print("mn = ",mn)
+    w,h = obraz.size
+    for i,j in zakres(w,h):
+        (r,g,b) = obrazek[i,j]
+        rr = int(128+(r-128)*mn)
+        gg = int(128+(g-128)*mn)
+        bb = int(128+(b-128)*mn)
+        obrazek[i,j] = (rr,gg,bb)
+    obraz.show()
+    return obraz
 
 #-------------------------------------------------------------------
+def kontrast2(obraz, wsp):
+    mn = (( 255 + wsp)/255)**2
+    obraz.point(lambda i: (128 +(i-128)*mn))
+    obraz.show()
+    return obraz
+#-------------------------------------------------------------------
 
-
-# obrazek1 = wstaw_inicjaly(shrimp, mg,1820,1230, 255,0,255)
-# obrazek1.save("obraz1.png")
+#obrazek1 = wstaw_inicjaly(shrimp, mg,535,470, 255,0,255)
+#obrazek1.save("obraz1.png")
 # obrazek2 = filtruj_inicjaly(shrimp, mg,200,200, 255)
 # obrazek2.save("obraz2.png")
 # obrazek2 = filtruj_inicjaly(shrimp, mg,200,200, 125)
 # obrazek2.save("obraz2-enhanced.png")
-obrazek3 = rysuj_kwadrat_srednia(shrimp, 200,200,51)
-obrazek31 = rysuj_kwadrat_srednia(obrazek3, 369,69,21)
-obrazek32 = rysuj_kwadrat_srednia(obrazek31, 575,75,77)
-obrazek32.save("obraz3.png")
+# obrazek3 = rysuj_kwadrat_srednia(shrimp, 200,200,51)
+# obrazek31 = rysuj_kwadrat_srednia(obrazek3, 369,69,21)
+# obrazek32 = rysuj_kwadrat_srednia(obrazek31, 575,75,77)
+# obrazek32.save("obraz3.png")
+obrazek40  = kontrast(shrimp, 0)
+obrazek40.save("obraz40.png")
+obrazek425 = kontrast(shrimp, 25)
+obrazek425.save("obraz425.png")
+obrazek480 = kontrast(shrimp, 80)
+obrazek480.save("obraz480.png")
+
+# plt.figure(figsize = (32,16))
+# plt.subplot(2,2,1)
+# plt.imshow(obrazek40)
+# plt.axis('off')
+# 
+# plt.subplot(2,2,2)
+# plt.imshow(obrazek425)
+# plt.axis('off')
+# 
+# plt.subplot(2,2,3)
+# plt.imshow(obrazek480)
+# plt.axis('off')
+# 
+# plt.subplots_adjust(wspace=0.05,hspace=0.05)
+# plt.savefig("fig1.png")
+# plt.show()
+
+
