@@ -23,7 +23,7 @@ def wstaw_inicjaly(obrazek, inicjal, m, n, r, g, b):
     return obraz
 
 #-------------------------------------------------------------------
-def filtruj_inicjaly(obrazek, inicjal, m, n):
+def filtruj_inicjaly(obrazek, inicjal, m, n, factor):
     obraz = obrazek.load()
     ini = np.asarray(inicjal)
     w, h  = obrazek.size
@@ -32,15 +32,15 @@ def filtruj_inicjaly(obrazek, inicjal, m, n):
     for i, j in zakres(wi, hi):
         if 0 == ini[i,j]:
             (r,g,b) = obraz[j+m,i+n]
-            r = int(255* np.log(1+(r/255)))
-            g = int(255* np.log(1+(g/255)))
-            b = int(255* np.log(1+(b/255)))
+            r = int(255* np.log(1+(r/factor)))
+            g = int(255* np.log(1+(g/factor)))
+            b = int(255* np.log(1+(b/factor)))
           #  r = 255 
           #  g = 255 
           #  b = 255 
             obraz[j+m,i+n] = (r,g,b)
     obrazek.show()
-    return obraz
+    return obrazek
 #-------------------------------------------------------------------
 def transformacja_logarytmiczna(obrazek):
     obraz = obrazek.load()
@@ -51,5 +51,7 @@ def transformacja_logarytmiczna(obrazek):
 #-------------------------------------------------------------------
 # obrazek1 = wstaw_inicjaly(shrimp, mg,1820,1230, 255,0,255)
 # obrazek1.save("obraz1.png")
-obrazek2 = filtruj_inicjaly(shrimp, mg,200,200)
-obrazek2.save("obraz2.png")
+# obrazek2 = filtruj_inicjaly(shrimp, mg,200,200, 255)
+# obrazek2.save("obraz2.png")
+# obrazek2 = filtruj_inicjaly(shrimp, mg,200,200, 125)
+# obrazek2.save("obraz2-enhanced.png")
