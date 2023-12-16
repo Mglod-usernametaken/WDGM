@@ -35,3 +35,15 @@ shrimp = Image.open("shrimp.jpg")
 # plt.subplots_adjust(wspace=0.05, hspace=0.05)
 # plt.savefig("fig1.png")
 # plt.show()
+
+
+shlimp = shrimp.convert('L')
+shlimp_emboss = shlimp.filter(ImageFilter.EMBOSS)
+shlimp_emboss.show()
+print(ImageFilter.EMBOSS.filterargs)
+
+shlimp_sobel1 = shlimp.filter(ImageFilter.EMBOSS.filterargs(size=(3,3), 1, 128, (-1, 0, 1, -2, 0, 2, -1, 0, 1)))
+shlimp_sobel1.show()
+
+shlimp_sobel2 = shlimp.filter(ImageFilter.EMBOSS.filterargs((3,3), scale=1, offset=128, kernel=(-1, -2, -1, 0, 0, 0, 1, 2, 1)))
+shlimp_sobel2.show()
