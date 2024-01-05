@@ -41,7 +41,7 @@ shrimp = Image.open("shrimp.jpg")
 # shlimp = shrimp.convert('L')
 # shlimp_emboss = shlimp.filter(ImageFilter.EMBOSS)
 # # shlimp_emboss.show()
-# print(ImageFilter.EMBOSS.filterargs)
+print(ImageFilter.EMBOSS.filterargs)
 # 
 # ImageFilter.EMBOSS.filterargs = ((3,3), 1, 128, (-1, 0, 1, -2, 0, 2, -1, 0, 1))
 # shlimp_sobel1 = shlimp.filter(ImageFilter.EMBOSS)
@@ -240,33 +240,58 @@ s_h = 0.27
 # 
 # plt.savefig("fig5.png")
 
+# #--------------------------------------------------
+# h,w = shrimp.size
+# plt.clf()
+# shrimp_R = shrimp.resize((int(w*s_w), int(h*s_h)), 3) 
+# shrimp_B = shrimp_R.resize((1920,1280),3)
+# 
+# # shrimp_R.show()
+# # shrimp_B.show()
+# 
+# diff=ImageChops.difference(shrimp,shrimp_B)
+# # diff.show()
+# 
+# plt.subplot(1,3,1)
+# plt.title("oryginał")
+# plt.imshow(shrimp)
+# plt.axis('off')
+# 
+# plt.subplot(1,3,2)
+# plt.title("po skalowaniu")
+# plt.imshow(shrimp_B)
+# plt.axis('off')
+# 
+# plt.subplot(1,3,3)
+# plt.title("diff")
+# plt.imshow(diff)
+# plt.axis('off')
+# 
+# plt.subplots_adjust(wspace=0.05, hspace=0.15)
+# plt.savefig("plot6.png")
+# plt.show()
+
 #--------------------------------------------------
-h,w = shrimp.size
-plt.clf()
-shrimp_R = shrimp.resize((int(w*s_w), int(h*s_h)), 3) 
-shrimp_B = shrimp_R.resize((1920,1280),3)
 
-# shrimp_R.show()
-# shrimp_B.show()
-
-diff=ImageChops.difference(shrimp,shrimp_B)
-# diff.show()
+rotato60 = shrimp.rotate(60, expand=1, fillcolor=(255,0,0))
+rotato_300 = shrimp.rotate(-300, expand=1, fillcolor=(0, 300, 0))
+rotato300 = shrimp.rotate(300, expand=0, fillcolor=(0, 300, 0))
+rotato60.show()
+rotato_300.show()
+rotato300.show()
 
 plt.subplot(1,3,1)
-plt.title("oryginał")
-plt.imshow(shrimp)
+plt.title("rotacja 60, powiększony")
+plt.imshow(rotato60)
 plt.axis('off')
-
 plt.subplot(1,3,2)
-plt.title("po skalowaniu")
-plt.imshow(shrimp_B)
+plt.title("rotacja -300, powiększony")
+plt.imshow(rotato_300)
 plt.axis('off')
-
 plt.subplot(1,3,3)
-plt.title("diff")
-plt.imshow(diff)
+plt.title("rotacja 300, przycięty")
+plt.imshow(rotato300)
 plt.axis('off')
-
 plt.subplots_adjust(wspace=0.05, hspace=0.15)
-plt.savefig("plot6.png")
+plt.savefig("fig7.png")
 plt.show()
